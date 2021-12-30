@@ -27,12 +27,25 @@ export default function ItemCard({product,count,setCartCount}) {
 
         if(!items)
         return localStorage.setItem('item',[id]);
-        
-        localStorage.setItem('item',[...items,id]);
-        setAdd(true)
-        setCartCount(count+1)
+        if(!items.includes(id.toString())){
+            localStorage.setItem('item',[...items,id]);
+            setAdd(true)
+            setCartCount(count+1)
+        }
+
     }
 
+    const removeFromCart = ()=>{
+        setAdd(false);
+        setCartCount(count-1);
+        const items = localStorage.getItem('item')?.split(',');
+        const index = items.indexOf(id.toString());
+      
+        items.splice(index, 1);
+
+
+        localStorage.setItem('item',items);
+    }
 
 
     return (
@@ -52,8 +65,8 @@ export default function ItemCard({product,count,setCartCount}) {
                  <p className='text-lg text-green-700'> In Stocks {inStocks} </p>
              </div>
 
-             <div className='flex items-center bg-gray-300 rounded-lg space-x-2 px-4 py-2 cursor-pointer active:scale-95 ' onClick = {()=>addToCart()}>
-                <p className='hover:text-indigo-600 whitespace-nowrap'>{added?"added":"Add to cart"}</p>
+             <div className='flex items-center bg-gray-300 rounded-lg space-x-2 px-4 py-2 cursor-pointer active:scale-95 ' onClick = {()=>added?removeFromCart():addToCart()}>
+                <p className='hover:text-indigo-600 whitespace-nowrap'>{added?"remove from cart":"Add to cart"}</p>
                     <ShoppingCartIcon className='h-4 w-4 text-indigo-500'/> 
              </div>
         </div>

@@ -9,6 +9,12 @@ function App() {
   // if(!localStorage.getItem('item'))
   //   localStorage.setItem([]);
   const [cartCount,setCartCount] =  useState(0);
+
+  useEffect(()=>{
+      if(localStorage.getItem('item'))
+      setCartCount(localStorage.getItem('item').split(',').length);
+  })
+
   const products = [
     {
         id:1,
