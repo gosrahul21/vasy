@@ -50,6 +50,7 @@ export default function Cart({}) {
             dispatch({
                 type:'ORDER_DONE'
             })
+            
             setLoading(false)
 
             setShow(true)

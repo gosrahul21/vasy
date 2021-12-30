@@ -1,27 +1,19 @@
 import React,{useEffect,useState} from 'react'
 import {ShoppingCartIcon} from '@heroicons/react/outline'
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 import * as t from '../actions/Types'
 export default function ItemCard({product,count,setCartCount}) {
 
     const {id,itemName,price,inStocks, images} = product
     const [added,setAdd] = useState(false);
-
+    const products = useSelector(state=> state.products)
     const dispatch = useDispatch();
 
 
     useEffect(()=>{
-        const items = localStorage.getItem('item')?.split(',');
-        
-        if(!items)
-            return;
-        
-        for(let i=0;i<items.length;i++)
-        {
-            if(id == items[i])
-                setAdd(true)
-        }
-    })
+        if(products[id])
+            setAdd(true);
+    },[products])
 
     const addToCart = ()=>{
         // console.log('add to cart',id)

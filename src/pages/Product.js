@@ -9,7 +9,7 @@ export default function Product({products,setCartCount,count}) {
 
   
     const renderItems = ()=>{
-        return search===''?products.map((product)=><div className='flex justify-center p-4'><ItemCard product={product} setCartCount={setCartCount} count={count} /></div>):null
+        return search===''?products.map((product)=><div className='flex justify-center p-4'><ItemCard product={product} /></div>):null
     }
 
     return (

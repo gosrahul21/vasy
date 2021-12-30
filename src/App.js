@@ -3,16 +3,22 @@ import Product from './pages/Product';
 import {useState,useEffect} from 'react'
 import { BrowserRouter,Routes,Route} from 'react-router-dom'
 import Cart from './pages/Cart'
-
+import {useDispatch} from 'react-redux'
 
 function App() {
+
+    const dispatch = useDispatch();
   // if(!localStorage.getItem('item'))
   //   localStorage.setItem([]);
-  const [cartCount,setCartCount] =  useState(0);
+//   const [cartCount,setCartCount] =  useState(0);
 
   useEffect(()=>{
-      if(localStorage.getItem('item'))
-      setCartCount(localStorage.getItem('item').split(',').length);
+     const items = localStorage.getItem('item');
+     if(items)
+     dispatch({
+         type:"LOAD_PRODUCTS",
+         payload:JSON.parse(items)
+     })
   },[])
 
   const products = [
@@ -81,12 +87,12 @@ function App() {
     
 
      <BrowserRouter>
-         <Header count={cartCount}/>
+         <Header/>
                
                     
                     <Routes>
-                        <Route exact path="/" element={ <Product products={products} setCartCount={setCartCount} count={cartCount}/>}></Route>
-                        <Route exact path="/cart" element={<Cart products = {products} />}></Route>
+                        <Route exact path="/" element={ <Product products={products} />}></Route>
+                        <Route exact path="/cart" element={<Cart  />}></Route>
 
                     </Routes>
               
