@@ -9,7 +9,7 @@ export default function Product({products,setCartCount,count}) {
 
   
     const renderItems = ()=>{
-        return search===''?products.map((product)=><div className='flex justify-center p-4'><ItemCard product={product} /></div>):null
+        return search===''?products.map((product)=><div className='flex justify-center p-4'><ItemCard product={product} /></div>):Object.keys(products).map((key)=>products[key].itemName.toLowerCase().includes(search)?<div className='flex justify-center p-4'><ItemCard product={products[key]} /></div>:null)
     }
 
     return (
@@ -17,7 +17,7 @@ export default function Product({products,setCartCount,count}) {
             <h1 className='font-bold text-gray-600 text-2xl'>Products</h1>
             {/* product top */}
             <div className='my-4 flex items-center space-x-2 rounded-full border border-gray-200  w-96 px-4 py-2 shadow-md'>
-                <input className='px-2 py-1 w-full outline-none' placeholder='Search for product' type='text' />
+                <input onChange={(e)=>setSearch(e.target.value)} className='px-2 py-1 w-full outline-none' placeholder='Search for product' type='text' />
                 <SearchIcon className='h-6 w-6'/>
             </div>
 
