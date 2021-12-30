@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import { useSelector,useDispatch } from 'react-redux';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
@@ -80,18 +81,26 @@ export default function Cart({}) {
        return  Object.keys(products).map((key)=>{
             console.log(products[key])
             return (<div className='flex space-x-4 items-center bg-gray-300 my-2 rounded-lg'>
-                <img className="h-20 w-30 rounded-lg " src={products[key]?.images[0]}/> 
+                <div className=' h-20 w-24'>
+                    <img className=" rounded-l-lg h-full w-full object-fill"  src={products[key]?.images[0]}/> 
+                </div>
+
                 <div className='flex w-full items-center'>
                 <div className='flex-1' >
                     { products[key].itemName}
+                    <p className='text-sm text-gray-600'>$ {products[key].price}</p>
                  </div>
 
                  <div className='flex items-center  pr-4 space-x-2'>
-                 <div className='flex flex-col '><ArrowDropUpIcon className='cursor-pointer hover:text-blue-600 ' onClick={()=>dispatch({type:"INCREASE_QUANTITY",payload:products[key]})}
-                 />
-                  <ArrowDropDownIcon onClick={()=>dispatch({type:"DESCREASE_QUANTITY",payload:products[key]})} className='cursor-pointer hover:text-blue-600 hover:scale-105 '/></div>
-                 <p className="text-sm text-indigo-600">{products[key].quantity}</p>
-                 </div>
+                    <div className='flex flex-col '>
+                        <ArrowDropUpIcon className='cursor-pointer hover:text-blue-600 ' onClick={()=>dispatch({type:"INCREASE_QUANTITY",payload:products[key]})}/>
+                        <ArrowDropDownIcon onClick={()=>dispatch({type:"DESCREASE_QUANTITY",payload:products[key]})} className='cursor-pointer hover:text-blue-600 hover:scale-105 '/></div>
+                        <p className="text-sm text-indigo-600">{products[key].quantity}</p>
+                        <DeleteIcon onClick={()=>dispatch({
+                            type:'REMOVE_PRODUCT',
+                            payload:products[key]
+                        })} className='text-red-500 cursor-pointer'/>
+                    </div>
                 
                 </div>
              

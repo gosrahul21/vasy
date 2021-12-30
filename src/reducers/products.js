@@ -21,7 +21,7 @@ export default  (state = initialState, action)=>{
             
             return updatedState;
         case 'DESCREASE_QUANTITY':
-            if(action.payload.quantity-1<0)
+            if(action.payload.quantity<1)
                 return state;
             updatedState = {...state,[action.payload.id]:{...action.payload,quantity:action.payload.quantity-1}}
             localStorage.setItem('item',JSON.stringify(updatedState))
