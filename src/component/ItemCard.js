@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import {ShoppingCartIcon} from '@heroicons/react/outline'
-export default function ItemCard({product}) {
+export default function ItemCard({product,count,setCartCount}) {
 
     const {id,itemName,price,inStocks, images} = product
     const [added,setAdd] = useState(false);
@@ -30,6 +30,7 @@ export default function ItemCard({product}) {
         
         localStorage.setItem('item',[...items,id]);
         setAdd(true)
+        setCartCount(count+1)
     }
 
 

@@ -2,13 +2,13 @@ import React,{useState} from 'react'
 import { SearchIcon } from '@heroicons/react/outline'
 import {ItemCard} from '../component'
 
-export default function Product({products}) {
+export default function Product({products,setCartCount,count}) {
 
     const [search,setSearch] = useState('');
 
   
     const renderItems = ()=>{
-        return search===''?products.map((product)=><div className='flex justify-center p-4'><ItemCard product={product} /></div>):null
+        return search===''?products.map((product)=><div className='flex justify-center p-4'><ItemCard product={product} setCartCount={setCartCount} count={count} /></div>):null
     }
 
     return (

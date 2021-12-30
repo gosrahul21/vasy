@@ -79,7 +79,7 @@ function App() {
                
                     
                     <Routes>
-                        <Route exact path="/" element={ <Product products={products} setCartCount={setCartCount}/>}></Route>
+                        <Route exact path="/" element={ <Product products={products} setCartCount={setCartCount} count={cartCount}/>}></Route>
                         <Route exact path="/cart" element={<Cart products = {products} />}></Route>
 
                     </Routes>
