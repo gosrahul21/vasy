@@ -1,10 +1,13 @@
 import React,{useEffect,useState} from 'react'
 import {ShoppingCartIcon} from '@heroicons/react/outline'
+import {useDispatch} from 'react-redux'
+import * as t from '../actions/Types'
 export default function ItemCard({product,count,setCartCount}) {
 
     const {id,itemName,price,inStocks, images} = product
     const [added,setAdd] = useState(false);
 
+    const dispatch = useDispatch();
 
 
     useEffect(()=>{
@@ -21,30 +24,45 @@ export default function ItemCard({product,count,setCartCount}) {
     })
 
     const addToCart = ()=>{
-        console.log('add to cart',id)
-        const items = localStorage.getItem('item')?.split(',');
+        // console.log('add to cart',id)
+        // const items = localStorage.getItem('item')?.split(',');
 
 
-        if(!items)
-        return localStorage.setItem('item',[id]);
-        if(!items.includes(id.toString())){
-            localStorage.setItem('item',[...items,id]);
-            setAdd(true)
-            setCartCount(count+1)
-        }
+        // if(!items)
+        // return localStorage.setItem('item',[id]);
+        // if(!items.includes(id.toString())){
+        //     localStorage.setItem('item',[...items,id]);
+        //     setAdd(true)
+        //     setCartCount(count+1)
+        // }
+        dispatch({
+            type:t.ADD_PRODUCT,
+            payload:product
+        })
+
+        setAdd(true)
+
 
     }
 
     const removeFromCart = ()=>{
-        setAdd(false);
-        setCartCount(count-1);
-        const items = localStorage.getItem('item')?.split(',');
-        const index = items.indexOf(id.toString());
-      
-        items.splice(index, 1);
+        // setAdd(false);
+        // setCartCount(count-1);
+        // const items = localStorage.getItem('item')?.split(',');
+        // const index = items.indexOf(id.toString());
+        
+        // items.splice(index, 1);
 
 
-        localStorage.setItem('item',items);
+        // localStorage.setItem('item',items);
+        dispatch({
+            type:t.REMOVE_PRODUCT,
+            payload:product
+        })
+
+        setAdd(false)
+
+
     }
 
 

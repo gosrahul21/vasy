@@ -3,10 +3,15 @@ import React from 'react'
 import Badge from '@mui/material/Badge';
 import { useNavigate } from 'react-router-dom';
 import {ShoppingCartIcon} from '@heroicons/react/outline'
+import {useSelector} from 'react-redux'
 
-export default function Header({count}) {
+export default function Header() {
 
     const navigate = useNavigate();
+     const products = useSelector(state => state.products)
+
+     const count = Object.keys(products).length;
+
     return (
         <div className='sticky top-0 z-50 bg-white shadow-md py-2 flex justify-between items-center px-4'>
             {/* logo */}

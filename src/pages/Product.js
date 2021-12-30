@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { SearchIcon } from '@heroicons/react/outline'
 import {ItemCard} from '../component'
+import { useSelector } from 'react-redux';
 
 export default function Product({products,setCartCount,count}) {
 

@@ -13,7 +13,7 @@ function App() {
   useEffect(()=>{
       if(localStorage.getItem('item'))
       setCartCount(localStorage.getItem('item').split(',').length);
-  })
+  },[])
 
   const products = [
     {
